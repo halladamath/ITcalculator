@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Germany Expat Tax Summary 2025</title>
+<style>
+  body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:#f8fafc;color:#0f172a;margin:0;padding:20px;}
+  .wrap{max-width:900px;margin:auto;background:#fff;padding:20px;border-radius:12px;box-shadow:0 5px 25px rgba(0,0,0,0.1);}
+  h2{margin-bottom:20px;}
+  .result{padding:10px;border-radius:8px;margin-bottom:12px;background:#ecfdf5;color:#065f46;display:flex;justify-content:space-between;}
+  .result.red{background:#fff1f2;color:#7f1d1d;border:1px solid #fca5a5;}
+  .btn{padding:10px 14px;background:#0ea5e9;color:#fff;border:none;border-radius:8px;cursor:pointer;margin-top:10px;}
+  .warning{background:#fff7ed;border-left:4px solid #f59e0b;padding:10px;border-radius:8px;margin-top:10px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h2>Summary & Pension Projection</h2>
+<div class="result">Pension Points: <span id="pensionPoints">---</span></div>
+<div class="result">Estimated Monthly Pension at 67: <span id="monthlyPension">---</span> EUR</div>
+<div class="result">Optimisation Suggestions:</div>
+<ul>
+  <li>Rürup Contribution: Maximize within allowed limits</li>
+  <li>Riester Contribution: Maximize within allowed limits</li>
+  <li>Home Office Deduction: Apply full allowance</li>
+  <li>Commute Expenses: Deduct km expenses</li>
+  <li>Childcare Expenses (if applicable): Deduct full amount</li>
+</ul>
+<button class="btn" onclick="window.open('https://expatwealth-de.setmore.com/','_blank')">Book Appointment</button>
+<div class="warning">Disclaimer: This tool is for estimation only. We are not tax consultants and cannot guarantee accuracy. Please consult a licensed tax advisor for personalized advice.</div>
+<script>
+// Retrieve values from localStorage
+const gross = parseFloat(localStorage.getItem('gross'))||60000;
+const ruRup = parseFloat(localStorage.getItem('ruRup'))||0;
+const riester = parseFloat(localStorage.getItem('riester'))||0;
+const childcare = parseFloat(localStorage.getItem('childcare'))||0;
+const home = parseFloat(localStorage.getItem('homeDays'))||0;
+const commute = parseFloat(localStorage.getItem('commuteKm'))||0;
+
+// Pension calculation
+const pensionRate = 0.093; // 9.3% public pension contribution
+const pensionPoints = (gross*pensionRate)/4000; // simplified calculation
+const monthlyPension = (pensionPoints*34.19); // EUR per month at age 67
+
+document.getElementById('pensionPoints').textContent = pensionPoints.toFixed(2);
+document.getElementById('monthlyPension').textContent = monthlyPension.toFixed(0);
+</script>
+</div>
+</body>
+</html>
